@@ -1,0 +1,27 @@
+{% load static %}
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="{% static 'testwork/style.css' %}" />
+<h1>{{ problem.title }}</h1>
+
+<!--
+<ul>
+{% for choice in problem.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>-->
+
+<div class="background">
+{% for choice in problem.choice_set.all %}
+    {% if choice.votes %}
+        <p> OK </p>
+    {% else %}
+        <p>{{problem.answer_set.get}}</p>
+        <p> Bad </p>
+    {% endif %}
+{% endfor %}
+</div>
+
+<p><a href="{% url 'testwork:detail' problem.id %}"> Vote again? </a></p>
+
+<a href="{% url 'testwork:index' %}"> To Index </a>

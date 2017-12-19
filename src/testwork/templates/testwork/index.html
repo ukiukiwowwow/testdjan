@@ -1,0 +1,20 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'testwork/style.css' %}" />
+
+    
+
+{% if latest_problem_list %}
+    <div class="problems">
+    <ul>
+    {% for problem in latest_problem_list %}
+    <div class = "indexproblem">
+        <span class="box-title">{{ forloop.counter }}</span>
+        <p><a href="{% url 'testwork:detail' problem.id %}">{{ problem.title }}</a><div class="date">{{problem.pub_date}}</div></p>
+    </div>
+    {% endfor %}
+    </ul>
+    </div>
+{% else %}
+    <p>No testwork are available.</p>
+{% endif %}
