@@ -1,0 +1,68 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'register_page/style.css' %}" />
+
+
+{% if cookie %}
+ <div>{{cookie}}</div>
+ <div>cookie</div>
+ <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="ログアウト" name="logout"/>
+ </form>
+{% else %}
+ <div>
+ <form action="" method="POST">
+    {% csrf_token %}
+    <p>Your Name: <input type="text" name="login_name"></input></p>
+    <p>Password: <input type="text" name="login_password"></input></p>
+    <input type="submit" value="ログイン" name="login"/>
+ </form>
+ 
+ <form action="" method="POST">
+   {% csrf_token %}
+   <p>Your Name: <input type="text" name="register_name"></input></p>
+   <p>Password: <input type="text" name="register_password"></input></p>
+   <input type="submit" value="登録" name="re"/>
+  </form>
+ </div>
+{% endif %}
+
+{% if not login_isSuccess and not firsttime  %}
+<div class="popupModal1">
+ <input type="radio" name="modalPop" id="pop11" checked="checked"/>
+ <label for="pop11"></label>
+ <input type="radio" name="modalPop" id="pop12" />
+ <label for="pop12">CLOSE</label>
+ <input type="radio" name="modalPop" id="pop13" />
+ <label for="pop13">×</label>
+ <div class="modalPopup2">
+  <div class="modalPopup3">
+   
+    {% if login_or_register %}
+    <h2 class="modalTitle">Login Error</h2>
+   <div class="modalMain">
+    <p>Login Error occured.</p> 
+    <p>Please, check your name and Password</p>
+    {% else %}
+    <h2 class="modalTitle">Register Error</h2>
+   <div class="modalMain">
+    <p>Register Error occured.</p> 
+    <p>Please, confirm your name</p>
+    {% endif %}
+   </div>
+  </div>
+ </div>
+</div>
+{% endif %}
+
+
+<p>
+   {% for s in my_list.password_set_all %}
+    <div class = "indexproblem">
+        <span class="box-title">{{ forloop.counter }}</span>
+        <p></p>
+    </div>
+    {% endfor %}
+</p>
+
